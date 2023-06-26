@@ -17,18 +17,6 @@ def hello_world():
 def health():
     return {"message": "Health OK!"}
 
-@app.route('/users1/<name>')
-def print(name):
-    return 'This is ' + name
-
-
-@app.route('/users')
-def get_name_suername():
-    # http://localhost:5000/users?name=lenin&surname=falconi
-    name = request.args.get('name')  # substitute parenthesis by [] to force to input a data
-    surname = request.args.get('surname')
-    return 'This is {} {}'.format(name, surname)
-
 
 @app.route('/population/', methods=['GET', 'POST'])
 def create_population_index():
@@ -42,7 +30,7 @@ def create_population_index():
                 r = requests.get('http://swapi.co/api/people/' + str(i))
                 resp = pd.index(index=index_name, doc_type=doc_type, id=i, body=json.loads(r.content))
             i = i + 1
-        return render_template('indexing_population.html', dato=i, response=resp)
+        return render_template('indexing_population.html', data=i, response=resp)
 
     print('index {} create'.format(index_name))
     return render_template('indexing_population.html')
