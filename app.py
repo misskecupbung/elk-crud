@@ -5,7 +5,7 @@ import json
 import os
 import requests
 
-es = Elasticsearch(hosts='kibana.dwiananda.click:9200')
+pd = Elasticsearch(hosts='http://kibana.dwiananda.click:9200')
 app = Flask(__name__)
 
 
