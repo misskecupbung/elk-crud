@@ -58,3 +58,8 @@ helm install elk-crud-chart/elk-crud-chart --generate-name
 - https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/examples.html
 - https://www.freecodecamp.org/news/how-to-dockerize-a-flask-app/
 - https://medium.com/geekculture/how-to-dockerize-a-python-flask-app-cf98df24775d
+- https://helm.sh
+- https://helm.sh/docs/topics/charts/#the-chartyaml-file
+- https://helm.sh/docs/chart_template_guide/values_files/
+- https://helm.sh/docs/topics/chart_repository/#hosting-chart-repositories
+- https://praveeng-nair.medium.com/host-your-helm-chart-repo-on-github-d189bf19fe60
