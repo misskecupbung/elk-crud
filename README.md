@@ -20,6 +20,14 @@ This repo contains simple code using python programming language that able to cr
 - http://elasticsearch.dwiananda.click:5000/delete_document/: delete an existing document
 
 
+### Deploy using Helm Chart
+```bash
+helm repo add elk-crud-chart https://elasticsearch-chart.dwiananda.click/
+helm repo list
+helm search repo elk-crud-chart
+helm install elk-crud-chart/elk-crud-chart --generate-name
+```
+
 ### Infrastructure Stacks
 - **Amazon EC2 (Elastic Compute Cloud)**
   <br> This service is for the worker node of the Kubernetes cluster. 
@@ -39,7 +47,6 @@ This repo contains simple code using python programming language that able to cr
 
 #### TODOs
 - Migrate to microservices applications (e.g using Amazon EKS)
-- Publish on Helm Chart
 
 ### References
 
