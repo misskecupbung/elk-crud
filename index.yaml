@@ -3,12 +3,12 @@ entries:
   elk-crud-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-07-03T17:08:08.086010225Z"
+    created: "2023-07-03T17:23:25.936952868Z"
     description: A Helm chart for Kubernetes
     digest: e50e0ed7160fb183fb1667a57f03abd807f49b240a7e0587baa17e626c8f4729
     name: elk-crud-chart
     type: application
     urls:
-    - https://misskecupbung.github.io/elk-crud-chart/elk-crud-chart-0.1.0.tgz
+    - https://elasticsearch-chart.dwiananda.click/elk-crud-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-03T17:08:08.085361306Z"
+generated: "2023-07-03T17:23:25.936275Z"
