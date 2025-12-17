@@ -5,10 +5,10 @@
     <title>Delete Index</title>
 </head>
 <body>
+<h2>Delete Index</h2>
     <form method="post">
-
-        <label>index_name: </label><input name="index_name" type="text">
-        <input type="submit">
+        <label>Index Name: </label><input name="index_name" type="text" required>
+        <input type="submit" value="Delete">
         <br>
         <br>
         <pre id="json">{{ response }}</pre>

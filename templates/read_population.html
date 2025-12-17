@@ -2,24 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Example</title>
+    <title>Read Document</title>
 </head>
 <body>
-<p> Write the index, document type and ID number:</p>
+<h2>Read Document</h2>
     <form method="post">
-        <label>index_name: </label><input name="index_name" type="text">
-        <label>doc_type: </label><input name="doc_type" type="text">
-        <label>id: </label><input name="id_number" type="number">
-        <input type="submit">
+        <label>Index Name: </label><input name="index_name" type="text" required>
+        <label>Document ID: </label><input name="id_number" type="text" required>
+        <input type="submit" value="Read">
         <br>
         <br>
         <pre id="json">{{ result }}</pre>
+        {% if result._source %}
         <ol>
             {% for key, value in result._source.items() %}
-            <li>{{ key }} :  {{ value }}  </li>
+            <li>{{ key }}: {{ value }}</li>
             {% endfor %}
         </ol>
-
+        {% endif %}
     </form>
 
 </body>

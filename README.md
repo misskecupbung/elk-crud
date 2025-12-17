@@ -1,65 +1,122 @@
-# Simple Python CRUD Application with Elasticsearch as a database
+# Elasticsearch CRUD Application
 
-This repo contains simple code using python programming language that able to create, read, update, and delete populations of specific city that using several Amazon Web Service (AWS) stacks.
+A simple Python Flask application that provides CRUD (Create, Read, Update, Delete) operations for managing city population data using Elasticsearch as the database.
 
-### Components
-- Python
-- Flask
-- Elasticsearch
-- Docker
+## Features
 
-### Endpoints
+- Create Elasticsearch indices
+- Insert, read, update, and delete documents
+- Search functionality
+- Health check endpoint
+- Docker support
+- Helm chart for Kubernetes deployment
 
-- http://elasticsearch.dwiananda.click:5000/health : GET health status
-- http://elasticsearch.dwiananda.click:5000/population/: GET populations for population_city index
-- http://elasticsearch.dwiananda.click:5000/population/: PUT -> input the index name and the document type
-- http://elasticsearch.dwiananda.click:5000/insert/: PUT -> input some data in an index and document type.
-- http://elasticsearch.dwiananda.click:5000/read/: GET: retrieve the information stored of a specific id in index.
-- http://elasticsearch.dwiananda.click:5000/update/: UPDATE: change the information of a specific id in an index
-- http://elasticsearch.dwiananda.click:5000/delete_index/: DELETE -> delete an existing document
-- http://elasticsearch.dwiananda.click:5000/delete_document/: delete an existing document
+## Tech Stack
 
+- **Python 3.11+** - Programming language
+- **Flask** - Web framework
+- **Elasticsearch** - NoSQL database
+- **Docker** - Containerization
+- **Helm** - Kubernetes package manager
 
-### Deploy using Helm Chart
+## API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | Home page |
+| `/health` | GET | Health check with Elasticsearch status |
+| `/population/` | GET, POST | Create a new index |
+| `/insert` | GET, POST | Insert a document |
+| `/read` | GET, POST | Read a document by ID |
+| `/update` | GET, POST | Update a document |
+| `/search` | GET, POST | Search documents |
+| `/delete_document` | GET, POST | Delete a document |
+| `/delete_index` | GET, POST | Delete an index |
+
+## Quick Start
+
+### Local Development
+
 ```bash
-helm repo add elk-crud-chart https://elasticsearch-chart.dwiananda.click/
-helm repo list
-helm search repo elk-crud-chart
-helm install elk-crud-chart/elk-crud-chart --generate-name
+# Clone the repository
+git clone https://github.com/yourusername/elk-crud.git
+cd elk-crud
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set environment variables
+export ELASTICSEARCH_HOST=http://localhost:9200
+export FLASK_DEBUG=true
+
+# Run the application
+python app.py
 ```
 
-### Infrastructure Stacks
-- **Amazon EC2 (Elastic Compute Cloud)**
-  <br> This service is for the worker node of the Kubernetes cluster. 
-- **Amazon VPC (Virtual Private Cloud)**
-  <br> Networking service for most of all resources.
-- **Amazon Route 53**
-  <br> This service is for managing the DNS server including its record. 
-- **Amazon ECR (Elastic Container Registry)**
-  <br> This service is to store  images.
-- **AWS Certificate Manager (ACM)**
-  <br> This service is for provision manage certificates of applications
-- **ELB using Application Load Balancer (ALB)**
-  <br> This service is a load balancer for the application deployed on Amazon EKS
-- **AWS IAM (Identity and Access Management)**
-  <br> This service is for configuring and managing access between the resources (e.g: access push the image from EC2 to Amazon ECR)
-- **GitHub & GitHub Actions**
+### Using Docker
 
-#### TODOs
-- Migrate to microservices applications (e.g using Amazon EKS)
+```bash
+# Build the image
+docker build -t elk-crud .
 
-### References
+# Run the container
+docker run -p 5000:5000 -e ELASTICSEARCH_HOST=http://your-es-host:9200 elk-crud
+```
 
-- https://opster.com/guides/elasticsearch/glossary/elasticsearch-index/
-- https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
-- https://www.linuxcapable.com/how-to-install-elasticsearch-8-on-ubuntu-22-04-lts/
-- https://www.elastic.co/guide/en/cloud/current/ec-api-deployment-crud.html
-- https://medium.com/geekculture/crud-operations-in-elasticsearch-1b5ff37bfb40
-- https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/examples.html
-- https://www.freecodecamp.org/news/how-to-dockerize-a-flask-app/
-- https://medium.com/geekculture/how-to-dockerize-a-python-flask-app-cf98df24775d
-- https://helm.sh
-- https://helm.sh/docs/topics/charts/#the-chartyaml-file
-- https://helm.sh/docs/chart_template_guide/values_files/
-- https://helm.sh/docs/topics/chart_repository/#hosting-chart-repositories
-- https://praveeng-nair.medium.com/host-your-helm-chart-repo-on-github-d189bf19fe60
+### Deploy using Helm Chart
+
+```bash
+helm repo add elk-crud-chart https://elasticsearch-chart.dwiananda.click/
+helm repo update
+helm search repo elk-crud-chart
+helm install elk-crud elk-crud-chart/elk-crud-chart
+```
+
+## Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `ELASTICSEARCH_HOST` | `http://localhost:9200` | Elasticsearch server URL |
+| `FLASK_DEBUG` | `false` | Enable debug mode |
+| `PORT` | `5000` | Application port |
+
+## Infrastructure (AWS)
+
+This application can be deployed on AWS using the following services:
+
+- **Amazon EKS** - Kubernetes cluster for container orchestration
+- **Amazon EC2** - Worker nodes for the Kubernetes cluster
+- **Amazon VPC** - Network isolation and security
+- **Amazon Route 53** - DNS management
+- **Amazon ECR** - Container image registry
+- **AWS Certificate Manager** - SSL/TLS certificates
+- **Application Load Balancer** - Traffic distribution
+- **AWS IAM** - Access management
+
+## Project Structure
+
+```
+elk-crud/
+├── app.py                 # Main Flask application
+├── Dockerfile             # Container configuration
+├── requirements.txt       # Python dependencies
+├── templates/             # HTML templates
+│   ├── indexing_population.html
+│   ├── insert_population.html
+│   ├── read_population.html
+│   ├── update_population.html
+│   ├── search_population.html
+│   ├── delete_document.html
+│   └── delete_index.html
+└── elk-crud-chart/        # Helm chart
+    ├── Chart.yaml
+    ├── values.yaml
+    └── templates/
+```
+
+## References
+
+- [Elasticsearch Documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [Helm Documentation](https://helm.sh/docs/)
+- [Docker Documentation](https://docs.docker.com/)

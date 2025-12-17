@@ -2,22 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Searching</title>
+    <title>Search Documents</title>
 </head>
 <body>
-<p> Enter the index, document type and an ID number :</p>
+<h2>Search Documents</h2>
     <form method="post">
-        <label>index_name: </label><input name="index_name" type="text">
-{#        <label>doc_type: </label><input name="doc_type" type="text">#}
-        <br>
-        <br>
-        <label>search: </label><input name="search_string" type="text">
-        <input type="submit" value="search">
-        <pre id="json">Raw json: {{ result }}</pre><br>
-        Total Hits: {{ result.hits.total.value }}
+        <label>Index Name: </label><input name="index_name" type="text" required>
+        <br><br>
+        <label>Search: </label><input name="search_string" type="text" required>
+        <input type="submit" value="Search">
+        <br><br>
+        <pre id="json">Raw JSON: {{ result }}</pre><br>
+        <strong>Total Hits:</strong> {{ result.hits.total.value }}
         <ol>
             {% for value in result.hits.hits %}
-            <li> id: {{ value._id }}, name: {{ value._source.name }}, score: {{ value._score }}  </li>
+            <li>ID: {{ value._id }}, Name: {{ value._source.name }}, Score: {{ value._score }}</li>
             {% endfor %}
         </ol>
     </form>

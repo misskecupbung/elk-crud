@@ -1,19 +1,27 @@
-FROM python:3
+FROM python:3.11-slim
 
-# Make a directory for our app
-WORKDIR /var/www/app
+LABEL maintainer="Dwi Ananda"
+LABEL description="Flask CRUD application with Elasticsearch"
 
-# Copy all code files with dependencies
-COPY . .
+# Set working directory
+WORKDIR /app
 
-# install all dependencies
-RUN pip3 install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PORT=5000
 
-# Copy code, and project essentials
-COPY app ./app
+# Install dependencies first (better caching)
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY app.py .
+COPY templates/ templates/
 
 # Expose application port
 EXPOSE 5000
 
-CMD python3 app.py
+# Run the application with gunicorn for production
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "app:app"]

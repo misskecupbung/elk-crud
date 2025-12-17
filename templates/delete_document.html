@@ -5,11 +5,11 @@
     <title>Delete Document</title>
 </head>
 <body>
+<h2>Delete Document</h2>
     <form method="post">
-
-        <label>index_name: </label><input name="index_name" type="text">
-        <label>id_number: </label><input name="id_number" type="numeric">
-        <input type="submit">
+        <label>Index Name: </label><input name="index_name" type="text" required>
+        <label>Document ID: </label><input name="id_number" type="text" required>
+        <input type="submit" value="Delete">
         <br>
         <br>
         <pre id="json">{{ response }}</pre>

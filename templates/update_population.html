@@ -2,19 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Update Example</title>
+    <title>Update Document</title>
 </head>
 <body>
+<h2>Update Document</h2>
     <form method="post">
-
-        <label>index_name: </label><input name="index_name" type="text">
-        <label>doc_type: </label><input name="doc_type" type="text">
-        <label>id_number: </label><input name="id_number" type="numeric">
-        <br>
-        <br>
-        <label>field_name: </label><input name="field_name" type="text">
-        <label>field_value: </label><input name="field_value" >
-        <input type="submit">
+        <label>Index Name: </label><input name="index_name" type="text" required>
+        <label>Document ID: </label><input name="id_number" type="text" required>
+        <br><br>
+        <label>Field Name: </label><input name="field_name" type="text" required>
+        <label>Field Value: </label><input name="field_value" required>
+        <input type="submit" value="Update">
         <br>
         <br>
         <pre id="json">{{ response }}</pre>
